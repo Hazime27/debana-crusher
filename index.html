@@ -1,0 +1,452 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>出鼻クラッシャー</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+<style>
+/* Layout: one narrow column, like a phone lit by an open freezer door at night.
+   Menu (pick a scene) -> play (wife's face + anger gauge, chat log, excuses) -> verdict. */
+:root{
+  --bg:#E6F0F4;
+  --surface:#FFFFFF;
+  --ink:#16262E;
+  --muted:#58727D;
+  --line:#C3D5DD;
+  --accent:#1D7F8E;
+  --accent-ink:#FFFFFF;
+  --bubble-you:#D5ECF0;
+  --danger:#D6402F;
+  --font-display:'Dela Gothic One','Hiragino Sans','Yu Gothic',sans-serif;
+  --font-body:'Zen Maru Gothic','Hiragino Maru Gothic ProN','Hiragino Sans','Yu Gothic',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D171C;--surface:#15242B;--ink:#E5F0F3;--muted:#8CA7B1;--line:#27414B;
+    --accent:#4CC3D1;--accent-ink:#06242A;--bubble-you:#1E3A43;--danger:#FF6B57;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D171C;--surface:#15242B;--ink:#E5F0F3;--muted:#8CA7B1;--line:#27414B;
+  --accent:#4CC3D1;--accent-ink:#06242A;--bubble-you:#1E3A43;--danger:#FF6B57;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  padding-block:24px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+main{max-width:560px;margin-inline:auto;display:flex;flex-direction:column;gap:16px}
+h1{font-family:var(--font-display);font-weight:400;font-size:clamp(1.9rem,8vw,2.6rem);line-height:1.15;margin:0;text-wrap:balance}
+h2{font-family:var(--font-display);font-weight:400;font-size:1.6rem;line-height:1.25;margin:0;text-wrap:balance}
+h3{font-size:.8rem;letter-spacing:.14em;color:var(--muted);margin:0;font-weight:700}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;color:var(--muted);font-weight:700}
+.lead{color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{
+  background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;
+  padding:14px 20px;font-weight:700;font-size:1rem;align-self:flex-start;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.small{padding:8px 14px;font-size:.85rem}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+
+.panel{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:16px}
+
+/* menu */
+.menu{display:flex;flex-direction:column;gap:16px}
+.all-btn{
+  text-align:left;width:100%;background:var(--accent);color:var(--accent-ink);
+  border:0;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:2px;
+}
+.all-btn b{font-size:1.05rem}
+.all-btn span{font-size:.85rem;opacity:.85}
+.all-btn:hover{filter:brightness(1.08)}
+.scene-list{display:flex;flex-direction:column;gap:8px}
+.scene-btn{
+  text-align:left;width:100%;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;
+  padding:12px 14px;display:flex;gap:12px;align-items:center;
+}
+.scene-btn:hover{border-color:var(--accent)}
+.scene-btn .txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.scene-btn b{font-size:1rem}
+.scene-btn small{color:var(--muted);font-size:.82rem;line-height:1.4}
+.badge{
+  flex:0 0 auto;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px;
+  border:1.5px solid var(--accent);color:var(--accent);
+}
+
+/* wife + gauge */
+.status{display:flex;gap:16px;align-items:center}
+.face{flex:0 0 112px;width:112px;height:112px}
+.face svg{width:100%;height:100%;display:block;overflow:visible}
+.gauge{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.gauge-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.gauge-head b{font-size:.85rem;letter-spacing:.08em}
+.pct{font-family:var(--font-display);font-size:1.7rem;line-height:1;font-variant-numeric:tabular-nums}
+.track{position:relative;height:18px;background:var(--bg);border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.fill{position:absolute;inset:0 auto 0 0;width:0;border-radius:999px;transition:width .7s cubic-bezier(.3,1.3,.5,1),background-color .7s}
+.tick{position:absolute;top:0;bottom:0;width:2px;background:var(--surface);opacity:.9}
+.zones{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);position:relative;height:1.1em}
+.zones span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.zones span:first-child{transform:none}
+.zones span:last-child{transform:translateX(-100%)}
+.shake{animation:shake .35s infinite}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px) rotate(-1deg)}75%{transform:translateX(2px) rotate(1deg)}}
+
+/* chat log */
+.round{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:.85rem;font-weight:700}
+.log{display:flex;flex-direction:column;gap:10px;min-height:7.5rem}
+.narr{font-size:.92rem;color:var(--muted)}
+.bubble{max-width:88%;padding:10px 14px;border-radius:16px;animation:pop .25s ease-out}
+.bubble.wife{align-self:flex-start;background:var(--surface);border:1.5px solid var(--line);border-bottom-left-radius:4px}
+.bubble.you{align-self:flex-end;background:var(--bubble-you);border-bottom-right-radius:4px}
+.who{display:block;font-size:.7rem;color:var(--muted);font-weight:700;letter-spacing:.08em}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.delta{align-self:flex-start;font-weight:700;font-size:.85rem;padding:2px 10px;border-radius:999px;border:1.5px solid currentColor;font-variant-numeric:tabular-nums}
+.delta.up{color:var(--danger)}
+.delta.down{color:var(--accent)}
+
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{
+  text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;
+  padding:12px 14px;
+}
+.choice:hover:not(:disabled){border-color:var(--accent)}
+.choice:disabled{opacity:.45;cursor:default}
+.prompt{font-size:.85rem;color:var(--muted);font-weight:700}
+
+.verdict{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.verdict .face{flex-basis:auto;width:132px;height:132px}
+.rank{font-weight:700;color:var(--accent)}
+.rank.bad{color:var(--danger)}
+
+@media (prefers-reduced-motion: reduce){
+  .shake,.bubble{animation:none}
+  .fill{transition:none}
+}
+@media (max-width:380px){
+  .status{flex-direction:column;align-items:stretch}
+  .face{align-self:center}
+}
+</style>
+
+<main>
+  <section id="menu" class="menu">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <p class="eyebrow">言い逃れ判定ゲーム</p>
+      <h1>出鼻クラッシャー</h1>
+      <p class="lead">なにかしようとすると、妻がまったく別のことを言い出す。あなたの返事ひとつで、夜の平和が決まる。</p>
+    </div>
+    <ul class="panel" style="margin:0;display:grid;gap:6px;color:var(--muted);font-size:.92rem;padding-left:1.2em">
+      <li>各場面で妻が2回、別の用事を持ち出してくる</li>
+      <li>4つ（2回目は3つ）の返事から言い逃れを選ぶ</li>
+      <li>怒りメーターが100%に届いたら激怒、あなたの負け</li>
+    </ul>
+    <button class="all-btn" id="allBtn" type="button">
+      <b>全場面チャレンジ</b>
+      <span>5場面を通しで。怒りは持ち越し、場面の間に少しだけ冷める</span>
+    </button>
+    <h3>場面を選ぶ</h3>
+    <div class="scene-list" id="sceneList"></div>
+  </section>
+
+  <section id="play" hidden style="display:contents">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <button class="btn ghost small" id="backBtn" type="button">← 場面選択</button>
+      <span class="round" id="roundNo"></span>
+    </div>
+    <div class="panel status">
+      <div class="face" id="faceBox" aria-hidden="true"></div>
+      <div class="gauge">
+        <div class="gauge-head"><b>妻の怒りメーター <span id="zoneName"></span></b><span class="pct" id="pct">25%</span></div>
+        <div class="track" id="track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="妻の怒り">
+          <div class="fill" id="fill"></div>
+          <div class="tick" style="left:25%"></div><div class="tick" style="left:60%"></div><div class="tick" style="left:85%"></div>
+        </div>
+        <div class="zones" aria-hidden="true"><span style="left:0">平穏</span><span style="left:42%">ムッ</span><span style="left:72%">プンプン</span><span style="left:100%">激怒</span></div>
+      </div>
+    </div>
+    <div class="log" id="log" aria-live="polite"></div>
+    <div id="choiceArea">
+      <p class="prompt">どう言い逃れる？</p>
+      <div class="choices" id="choices" style="margin-top:8px"></div>
+    </div>
+    <button class="btn" id="nextBtn" type="button" hidden>次へ</button>
+  </section>
+
+  <section id="end" class="verdict" hidden>
+    <div class="face" id="endFace" aria-hidden="true"></div>
+    <h2 id="endTitle"></h2>
+    <p id="endText" class="lead"></p>
+    <p id="endRank" class="rank"></p>
+    <div class="row">
+      <button class="btn" id="retryBtn" type="button">もう一度挑戦する</button>
+      <button class="btn ghost" id="menuBtn" type="button">場面選択へ</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  /* 夫がやろうとしたこと(act)に対して、妻はまったく別のこと(wife)を言う */
+  var SCENES = [
+    {title:"お風呂に入る", act:"お風呂に入ろうとした。",
+     win:"お風呂の前にアイスをひと口。湯船の中で、ええ感じに溶けた気分になった。",
+     steps:[
+      {wife:"なあ、アイス食べよ。今すぐ。", c:[
+        {t:"お風呂のあとに食べるべさ",d:-10,r:"あとで？ ……風呂上がりのアイスもアリやな。"},
+        {t:"今入らないと、お湯冷めるっしょ",d:25,r:"お湯が冷めるより、アイスが溶けるほうが早いわ。"},
+        {t:"アイスもお風呂に持って入るべや",d:30,r:"浴槽が甘なるやろ。やめて。"},
+        {t:"わかった、先に食べるべ",d:-20,r:"やった。ほな私、バニラな。"}]},
+      {wife:"お風呂は逃げへんで。アイスは溶けるねん。", c:[
+        {t:"したら一口だけ食べて、そのあと入るわ",d:-15,r:"一口やで。……はい、あーん。"},
+        {t:"お風呂も溶けるっしょ、たぶん",d:35,r:"意味わからへん。"},
+        {t:"先に入るのが俺のルーティンだべさ",d:22,r:"ルーティンより、今日の気分やろ。"}]}]},
+    {title:"トイレに行く", act:"トイレに行こうとした。",
+     win:"トイレから出たら、氷たっぷりのグラスが待ってた。のどもすっきり。",
+     steps:[
+      {wife:"あ、アイスコーヒー飲みたいわ。氷は多めでな。", c:[
+        {t:"戻ったらすぐ淹れるっしょ",d:-8,r:"待ってるで。はよ戻ってきてや。"},
+        {t:"トイレ、なまら急いでるんだわ",d:15,r:"ほな急いで。コーヒーは待たせてええから。"},
+        {t:"トイレでコーヒー淹れるべか",d:30,r:"それは絶対飲まへん。"},
+        {t:"自分の分も淹れるから、ちょっこし待ってけれ",d:-18,r:"あ、私のは薄めでお願い。"}]},
+      {wife:"なあ、まだ？ のどカラカラなんやけど。", c:[
+        {t:"出たら、ちゃんと淹れるっしょ",d:-10,r:"……ちゃんと、って言うたからな。"},
+        {t:"トイレの中でも聞こえてたっしょ",d:20,r:"ほな返事してや。"},
+        {t:"ガムシロも付けるべ",d:-14,r:"ガムシロは2個な。"}]}]},
+    {title:"布団に入って寝る", act:"布団に入って、もう寝ようとした。",
+     win:"半分こしたアイスのおかげで、ぐっすり眠れそう。",
+     steps:[
+      {wife:"ちょっと小腹すいたわ。冷凍庫のアイス、半分こせえへん？", c:[
+        {t:"もう歯みがいちゃったんだわ",d:18,r:"もっかいみがいたらええだけやん。"},
+        {t:"明日の朝イチで食べるべさ",d:-6,r:"朝にアイス？ ……それはそれで贅沢かもな。"},
+        {t:"半分こだべ。ただし俺が多めな",d:25,r:"自分が多いんは、半分こって言わへんねん。"},
+        {t:"ベッドの中で食べるのだけは勘弁してけれ",d:-12,r:"わかった、台所で立って食べるわ。"}]},
+      {wife:"溶けてまうで。私ひとりで食べてええの？", c:[
+        {t:"ひとりで食べたら、ひとり分太るっしょ",d:35,r:"それ、どういう意味？"},
+        {t:"わかった、一口だけ付き合うべ",d:-18,r:"やった。スプーン2本持ってくるな。"},
+        {t:"寝たふりするべ",d:28,r:"目ぇ開いてるで。"}]}]},
+    {title:"ゲームを始める", act:"ゲームを起動しようとした。",
+     win:"コーヒー淹れたあと、やっとゲームを始められた。",
+     steps:[
+      {wife:"アイスコーヒー、飲みとうなってきたわ。", c:[
+        {t:"ゲームの起動中に淹れてくるべさ",d:-14,r:"起動終わる前に戻ってきてや。"},
+        {t:"アイスコーヒーなら、冷蔵庫にあるっしょ",d:20,r:"淹れてほしいんや、わかるやろ。"},
+        {t:"今ちょうどボス戦で、手ぇ離せないんだわ",d:32,r:"まだ起動してへんやん。"},
+        {t:"ゲームのあとで、豆から挽くべ",d:-5,r:"豆から？ それ時間かかるやつやん。"}]},
+      {wife:"そのゲーム、何時間やるん？", c:[
+        {t:"1時間だけだべさ",d:15,r:"1時間って言うて、3時間やるやん。"},
+        {t:"コーヒーできるまでの間だけだべ",d:-12,r:"ほな淹れるん、はよしてや。"},
+        {t:"世界を救ったら終わるっしょ",d:30,r:"こっちの世界も救ってほしいわ。"}]}]},
+    {title:"コンビニに行く", act:"ちょっとコンビニに行こうとした。",
+     win:"コンビニ袋の中にはアイスとコーヒー。妻は満足そうやった。",
+     steps:[
+      {wife:"アイス買うてきて。冷凍庫にあるけど、それとは別のやつな。", c:[
+        {t:"冷凍庫にあるの食べればいいっしょ",d:35,r:"それは明日の分や。"},
+        {t:"どの味がいいべか。全部買ってくるべさ",d:-15,r:"全部は多いわ。でもその気持ちは好きやで。"},
+        {t:"雨降りそうだから、明日でもいいべか？",d:22,r:"アイスは雨でも溶けへんで。"},
+        {t:"アイスコーヒー用の氷も買ってくるべ",d:-8,r:"氷は足りてるで。でも気ぃきくやん。"}]},
+      {wife:"あ、コーヒーも飲みたいから、それも買うてきて。", c:[
+        {t:"パックのやつでいいべか？",d:-10,r:"ブラックの無糖な。"},
+        {t:"家にあるの飲むべさ",d:25,r:"家のは飲み飽きたんや。"},
+        {t:"店員さんにおすすめ聞いてみるべか",d:18,r:"店員さんに、そんなん聞かんといて。"}]}]}
+  ];
+
+  var START_ANGER = 25, COOLDOWN = 12;
+  var $ = function(id){return document.getElementById(id)};
+  var anger = START_ANGER, mode = "all", sceneIdx = 0, stepIdx = 0, locked = false;
+  var cleared = {};
+
+  function clamp(v){return Math.max(0,Math.min(100,v))}
+  function zone(a){return a<25?"平穏":a<60?"ムッ":a<85?"プンプン":"激怒寸前"}
+  function lerp(a,b,t){return a+(b-a)*t}
+
+  /* 肩までの髪とメガネの妻 */
+  function faceSVG(a){
+    var t=a/100;
+    var skin="hsl(24,"+Math.round(lerp(55,88,t))+"%,"+Math.round(lerp(88,68,t))+"%)";
+    var hair="#6b4636", ink="#3b2622";
+    var browOut=(43-t*2).toFixed(1), browIn=(42+t*6).toFixed(1);
+    var cy=(78-t*14).toFixed(1);
+    var mouth = a>=90
+      ? '<ellipse cx="50" cy="72" rx="7" ry="6" fill="#5a1d17" stroke="'+ink+'" stroke-width="2.2"/>'
+      : '<path d="M40 70 Q50 '+cy+' 60 70" fill="none" stroke="'+ink+'" stroke-width="2.8" stroke-linecap="round"/>';
+    var blush=(t*0.55).toFixed(2);
+    return '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">'
+      /* back hair down to the shoulders */
+      +'<g transform="translate(7 -2) scale(0.86)"><path d="M13 54 C11 16 89 16 87 54 L89 92 Q90 102 80 102 L20 102 Q10 102 11 92 Z" fill="'+hair+'" stroke="'+ink+'" stroke-width="2.4" stroke-linejoin="round"/>'
+      /* neck */
+      +'<rect x="39" y="76" width="22" height="26" fill="'+skin+'" stroke="'+ink+'" stroke-width="2.4"/>'
+      /* face */
+      +'<circle cx="50" cy="52" r="31" fill="'+skin+'" stroke="'+ink+'" stroke-width="2.4"/>'
+      /* fringe */
+      +'<path d="M18 46 C20 14 80 14 82 46 C70 30 58 30 50 33 C42 30 30 30 18 46 Z" fill="'+hair+'" stroke="'+ink+'" stroke-width="2.4" stroke-linejoin="round"/>'
+      /* side hair over cheeks */
+      +'<path d="M17 50 Q15 80 20 98 L27 98 Q22 76 24 52 Z" fill="'+hair+'"/>'
+      +'<path d="M83 50 Q85 80 80 98 L73 98 Q78 76 76 52 Z" fill="'+hair+'"/>'
+      +'<circle cx="31" cy="66" r="5" fill="#e5483a" opacity="'+blush+'"/>'
+      +'<circle cx="69" cy="66" r="5" fill="#e5483a" opacity="'+blush+'"/>'
+      /* brows */
+      +'<line x1="28" y1="'+browOut+'" x2="44" y2="'+browIn+'" stroke="'+ink+'" stroke-width="3" stroke-linecap="round"/>'
+      +'<line x1="72" y1="'+browOut+'" x2="56" y2="'+browIn+'" stroke="'+ink+'" stroke-width="3" stroke-linecap="round"/>'
+      /* glasses */
+      +'<rect x="27" y="49" width="19" height="14" rx="5" fill="#ffffff" fill-opacity=".35" stroke="#2a3a44" stroke-width="2.4"/>'
+      +'<rect x="54" y="49" width="19" height="14" rx="5" fill="#ffffff" fill-opacity=".35" stroke="#2a3a44" stroke-width="2.4"/>'
+      +'<line x1="46" y1="54" x2="54" y2="54" stroke="#2a3a44" stroke-width="2.4"/>'
+      +'<line x1="27" y1="53" x2="21" y2="51" stroke="#2a3a44" stroke-width="2.2" stroke-linecap="round"/>'
+      +'<line x1="73" y1="53" x2="79" y2="51" stroke="#2a3a44" stroke-width="2.2" stroke-linecap="round"/>'
+      +'<circle cx="36.5" cy="56" r="2.7" fill="'+ink+'"/><circle cx="63.5" cy="56" r="2.7" fill="'+ink+'"/>'
+      +mouth
+      +'</g>'
+      /* shoulders sit in front of the hair tips and the neck */
+      +'<path d="M4 100 Q6 86 28 82 L72 82 Q94 86 96 100 Z" fill="#3E8E9C" stroke="'+ink+'" stroke-width="2.4" stroke-linejoin="round"/>'
+      +'<path d="M86 8 l5 6 -5 3 5 6" fill="none" stroke="#d6402f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity="'+(a>=70?1:0)+'"/>'
+      +'<path d="M14 8 l-5 6 5 3 -5 6" fill="none" stroke="#d6402f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity="'+(a>=90?1:0)+'"/>'
+      +'</svg>';
+  }
+
+  function setAnger(a){
+    anger=clamp(a);
+    var fill=$("fill");
+    fill.style.width=anger+"%";
+    fill.style.backgroundColor="hsl("+Math.round(175-anger*1.75)+",70%,"+(anger>60?50:42)+"%)";
+    $("pct").textContent=Math.round(anger)+"%";
+    $("zoneName").textContent="· "+zone(anger);
+    $("track").setAttribute("aria-valuenow",Math.round(anger));
+    $("faceBox").innerHTML=faceSVG(anger);
+    $("faceBox").classList.toggle("shake",anger>=80);
+  }
+
+  function addNarr(t){var p=document.createElement("p");p.className="narr";p.textContent=t;$("log").appendChild(p)}
+  function addBubble(kind,t){
+    var d=document.createElement("div");d.className="bubble "+kind;
+    var w=document.createElement("span");w.className="who";w.textContent=kind==="wife"?"妻":"あなた";
+    d.appendChild(w);d.appendChild(document.createTextNode(t));$("log").appendChild(d);
+  }
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+  function show(id){
+    ["menu","play","end"].forEach(function(k){$(k).hidden=(k!==id)});
+    window.scrollTo(0,0);
+  }
+
+  function renderMenu(){
+    var list=$("sceneList");list.innerHTML="";
+    SCENES.forEach(function(s,i){
+      var b=document.createElement("button");b.type="button";b.className="scene-btn";
+      var txt=document.createElement("span");txt.className="txt";
+      var n=document.createElement("b");n.textContent=s.title;
+      var sm=document.createElement("small");sm.textContent="妻「"+s.steps[0].wife+"」";
+      txt.appendChild(n);txt.appendChild(sm);b.appendChild(txt);
+      if(cleared[i]){var g=document.createElement("span");g.className="badge";g.textContent="クリア";b.appendChild(g)}
+      b.addEventListener("click",function(){startGame("single",i)});
+      list.appendChild(b);
+    });
+  }
+
+  function roundLabel(){
+    var s=SCENES[sceneIdx];
+    var base=(mode==="all"?"場面 "+(sceneIdx+1)+" / "+SCENES.length+" · ":"")+s.title;
+    return base+"（"+(stepIdx+1)+"/"+s.steps.length+"）";
+  }
+
+  function showStep(fresh){
+    var s=SCENES[sceneIdx], st=s.steps[stepIdx];
+    locked=false;
+    $("roundNo").textContent=roundLabel();
+    if(fresh){$("log").innerHTML="";addNarr(s.act)}
+    addBubble("wife",st.wife);
+    $("nextBtn").hidden=true;
+    $("choiceArea").hidden=false;
+    var box=$("choices");box.innerHTML="";
+    shuffle(st.c).forEach(function(ch){
+      var b=document.createElement("button");
+      b.type="button";b.className="choice";b.textContent="「"+ch.t+"」";
+      b.addEventListener("click",function(){pick(ch)});
+      box.appendChild(b);
+    });
+  }
+
+  function pick(ch){
+    if(locked)return;locked=true;
+    Array.prototype.forEach.call($("choices").children,function(b){b.disabled=true});
+    var d=ch.d+Math.floor(Math.random()*7)-3;
+    if(ch.d<0&&d>-3)d=-3;
+    if(ch.d>0&&d<3)d=3;
+    addBubble("you",ch.t);
+    addBubble("wife",ch.r);
+    var chip=document.createElement("span");
+    chip.className="delta "+(d>0?"up":"down");
+    chip.textContent="怒り "+(d>0?"+":"")+d;
+    $("log").appendChild(chip);
+    setAnger(anger+d);
+    $("choiceArea").hidden=true;
+    var s=SCENES[sceneIdx];
+    var sceneDone=stepIdx===s.steps.length-1;
+    var over=anger>=100;
+    var finalStep=sceneDone&&(mode==="single"||sceneIdx===SCENES.length-1);
+    var nb=$("nextBtn");
+    nb.textContent=(over||finalStep)?"結果を見る":(sceneDone?"次の場面へ":"妻が続ける…");
+    nb.hidden=false;nb.focus({preventScroll:true});
+  }
+
+  function onNext(){
+    var s=SCENES[sceneIdx];
+    var sceneDone=stepIdx===s.steps.length-1;
+    if(anger>=100){finish(false);return}
+    if(!sceneDone){stepIdx++;showStep(false);return}
+    cleared[sceneIdx]=true;
+    if(mode==="single"||sceneIdx===SCENES.length-1){finish(true);return}
+    sceneIdx++;stepIdx=0;
+    setAnger(anger-COOLDOWN);
+    showStep(true);
+    var l=$("log");
+    var n=document.createElement("p");n.className="narr";n.textContent="ひと息ついて、怒り -"+COOLDOWN+"。";
+    l.insertBefore(n,l.firstChild);
+  }
+
+  function finish(win){
+    show("end");
+    var s=SCENES[sceneIdx];
+    $("endFace").innerHTML=faceSVG(anger);
+    $("endFace").classList.toggle("shake",!win);
+    if(!win){
+      $("endTitle").textContent="激怒。";
+      $("endText").textContent="妻「今夜のごはん、あんたの分はないで。アイスも全部、私の分や。」";
+      $("endRank").textContent="判定：夫失格（冷凍庫は施錠されました）";
+      $("endRank").className="rank bad";
+    }else{
+      var r=Math.round(anger);
+      $("endTitle").textContent="激怒しない。";
+      $("endText").textContent=(mode==="all"?"5場面を乗り切りました。妻「……一口だけやで。」冷凍庫を開ける権利を手に入れました。":s.win);
+      $("endRank").textContent="最終の怒り "+r+"% ／ 判定："+(r<20?"理想の夫":r<50?"ギリギリ生存":"首の皮一枚");
+      $("endRank").className="rank";
+    }
+  }
+
+  function startGame(m,i){
+    mode=m;sceneIdx=i||0;stepIdx=0;
+    show("play");
+    setAnger(START_ANGER);
+    showStep(true);
+  }
+
+  $("allBtn").addEventListener("click",function(){startGame("all",0)});
+  $("backBtn").addEventListener("click",function(){renderMenu();show("menu")});
+  $("menuBtn").addEventListener("click",function(){renderMenu();show("menu")});
+  $("retryBtn").addEventListener("click",function(){startGame(mode,mode==="all"?0:sceneIdx)});
+  $("nextBtn").addEventListener("click",onNext);
+  renderMenu();
+  show("menu");
+})();
+</script>
+
+</body></html>
